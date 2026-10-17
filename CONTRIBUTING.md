@@ -140,8 +140,8 @@ Quando a equipe responsável mudar, **troque a label**.
 
   Isso liga o PR à issue (aparece em *Development*, na lateral da issue). O fechamento automático acontece quando o PR é mesclado na **branch padrão** do repositório.
 - Se o PR depende de outro repositório, informe em **Depende de** (ex.: `4dsm2026/backend_fatecProjeto#105`).
-- Os revisores são solicitados automaticamente (líderes da equipe do autor). É preciso **1 aprovação**.
-- O **CI** (lint, testes e build) roda em todo PR para `develop` e `main`. PR com CI vermelho não deve ser mesclado.
+- No backend e no frontend, os revisores são solicitados automaticamente (líderes da equipe do autor) e é preciso **1 aprovação**. Na documentação e nos testes, o PR é obrigatório, mas pode ser mesclado sem aprovação.
+- O **CI** (lint, testes e build) roda em todo PR para `develop` e `main`. Nos PRs para `main` ele é **obrigatório**: o GitHub bloqueia o merge se falhar. Nos PRs para `develop` ele avisa, e PR com CI vermelho não deve ser mesclado.
 - Prints e vídeos de evidência: **anexe no PR** (arraste para a caixa de texto). Não faça commit de vídeos, `.zip` ou `.pdf` grandes.
 
 ---
