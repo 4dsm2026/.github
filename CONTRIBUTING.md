@@ -32,7 +32,7 @@ Issue  →  Branch  →  Pull Request  →  Revisão  →  develop  →  (fim da
 ```
 
 1. **Toda mudança começa com uma issue.** Se não existe, crie uma usando os modelos (seção 4).
-2. Atribua-se como **responsável** (*Assignees*) antes de começar e coloque a issue na **milestone da sprint**.
+2. Atribua-se como **responsável** (*Assignees*) antes de começar. No [quadro do projeto](https://github.com/orgs/4dsm2026/projects), coloque a issue na **Sprint** atual e mova o **Status** conforme avança.
 3. Crie a branch a partir de `develop` (seção 3).
 4. Abra o Pull Request para `develop` preenchendo o modelo — principalmente o campo **Issue** (seção 5).
 5. Após a aprovação e o merge, a issue é fechada pelo PR (não feche manualmente).
@@ -130,7 +130,7 @@ Quando a equipe responsável mudar, **troque a label**.
 
 ## 5. Pull Requests
 
-- **Título** no padrão de commit (seção 7). Ex.: `feat(sugestoes): adiciona editor com texto formatado`.
+- **Título** no padrão de commit (seção 7). Ex.: `feat(sugestoes): adiciona editor com texto formatado`. O check **PR / Título e label do PR** confere o título e aplica sozinho a label de tipo (`feat` → `[Feature]`, `fix` → `[Fix]`, …). Essas labels organizam as notas da release.
 - **Vincule a issue** no corpo do PR com uma palavra-chave:
 
   ```text
@@ -148,8 +148,18 @@ Quando a equipe responsável mudar, **troque a label**.
 
 ## 6. Sprints e versões
 
-- Cada sprint é uma **milestone** com data de término (ex.: `Sprint 5 — 31/10`). Toda issue trabalhada na sprint deve estar nela.
-- No fim da sprint, um PR `develop → main` é aberto e, após o merge, é criada uma **tag** e uma **release** (`v0.5.0`, `v0.6.0`, …). As notas da release são geradas automaticamente a partir dos títulos dos PRs — por isso os títulos importam.
+- As sprints ficam no campo **Sprint** do [quadro do projeto](https://github.com/orgs/4dsm2026/projects), que reúne as issues e PRs dos quatro repositórios. Toda issue trabalhada na sprint deve estar nela.
+- No fim da sprint, um PR `develop → main` é aberto. Quando ele é mesclado, o workflow **Release** cria sozinho a **tag** e a **release** com a próxima versão:
+
+  | Commits desde a última versão | Nova versão |
+  |---|---|
+  | algum `feat` | sobe o minor: `v0.4.2` → `v0.5.0` |
+  | só `fix`, `docs`, `chore`… | sobe o patch: `v0.4.2` → `v0.4.3` |
+  | `!` no tipo ou `BREAKING CHANGE` | sobe o major (enquanto `0.x`, sobe o minor) |
+
+  As notas da release listam os PRs agrupados pela label de tipo — por isso o título do PR importa.
+- Em `docs_fatecProjeto` e `test_fatecProjeto`, a release é manual: **Actions → Release → Run workflow**.
+- O histórico de versões fica em **Releases** de cada repositório.
 
 ---
 
@@ -171,10 +181,28 @@ Tipos: `feat`, `fix`, `refactor`, `test`, `docs`, `style`, `chore`, `perf`, `ci`
 - Primeira letra minúscula, sem ponto final.
 - Título com no máximo **50 caracteres**; linha em branco antes do corpo; corpo com até **72 caracteres** por linha.
 
+### Hooks do git
+
+Cada repositório tem a pasta `.githooks/`, com dois hooks:
+
+| Hook | O que faz |
+|---|---|
+| `commit-msg` | Recusa o commit se a mensagem não seguir o padrão acima (avisa se o título passar de 50 caracteres) |
+| `pre-commit` | Recusa arquivos acima de 5 MB e arquivos `.env` |
+
+No backend, no frontend e na documentação, os hooks são ativados sozinhos no `pnpm install` / `npm install`. No repositório de testes (Python), rode uma vez:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+Não use `git commit --no-verify` para contornar os hooks. Se o hook bloquear algo que deveria passar, abra uma issue.
+
 ---
 
 ## 8. Documentação e testes
 
 - **Documentação** fica somente em [`docs_fatecProjeto`](https://github.com/4dsm2026/docs_fatecProjeto). Se o seu PR muda um fluxo, uma regra de negócio ou uma tela, abra também um PR lá (ou uma issue `[Docs]`).
+- **Vulnerabilidades e segredos expostos** nunca vão em issue pública: veja a [política de segurança](SECURITY.md).
 - **Testes unitários** ficam em cada repositório (`pnpm test`).
 - **Testes de ponta a ponta** ficam em [`test_fatecProjeto`](https://github.com/4dsm2026/test_fatecProjeto). Cada teste deve indicar a issue ou história de usuário que verifica. Se o seu PR muda o comportamento de uma tela, verifique se algum teste precisa ser atualizado.

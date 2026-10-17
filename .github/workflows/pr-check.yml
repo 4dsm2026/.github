@@ -1,0 +1,45 @@
+# Workflow reutilizável: confere o título do PR (Conventional Commits) e aplica
+# a label de tipo correspondente. As labels alimentam as notas das releases.
+#
+# Uso (em cada repositório):
+#   on:
+#     pull_request:
+#       types: [opened, edited, reopened]
+#   jobs:
+#     pr:
+#       uses: 4dsm2026/.github/.github/workflows/pr-check.yml@main
+name: PR
+
+on:
+  workflow_call:
+
+jobs:
+  titulo:
+    name: Título e label do PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validar o título e aplicar a label de tipo
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITULO: ${{ github.event.pull_request.title }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          tipo=$(printf '%s' "$TITULO" | sed -nE 's/^([a-z]+)(\([^)]*\))?!?: .+/\1/p')
+          case "$tipo" in
+            feat)                  label="[Feature]" ;;
+            fix)                   label="[Fix]" ;;
+            refactor|perf)         label="[Refactor]" ;;
+            test)                  label="[Test]" ;;
+            docs)                  label="[Docs]" ;;
+            style)                 label="[Style]" ;;
+            chore|ci|build|revert) label="" ;;
+            *)
+              echo "::error title=Título fora do padrão::Use '<tipo>(escopo): descrição', ex.: 'feat(sugestoes): adiciona filtro por status'. Tipos: feat, fix, refactor, test, docs, style, chore, perf, ci, build, revert."
+              exit 1
+              ;;
+          esac
+          echo "Título ok (tipo: $tipo)"
+          if [ -n "$label" ]; then
+            gh pr edit "$PR" --repo "$GITHUB_REPOSITORY" --add-label "$label"
+            echo "Label aplicada: $label"
+          fi

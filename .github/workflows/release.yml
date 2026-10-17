@@ -1,0 +1,68 @@
+# Workflow reutilizável: cria a próxima release (tag + notas) a partir dos commits.
+#
+# Versão (SemVer), calculada pelos commits desde a última tag vX.Y.Z:
+#   - "feat"                         -> sobe o minor (0.1.0 -> 0.2.0)
+#   - "!" no tipo ou BREAKING CHANGE -> sobe o major (enquanto 0.x, sobe o minor)
+#   - qualquer outro commit          -> sobe o patch (0.1.0 -> 0.1.1)
+# As notas são geradas pelo GitHub a partir dos PRs, agrupadas por label
+# conforme .github/release.yml de cada repositório.
+#
+# Uso (em cada repositório):
+#   jobs:
+#     release:
+#       uses: 4dsm2026/.github/.github/workflows/release.yml@main
+name: Release
+
+on:
+  workflow_call:
+
+jobs:
+  release:
+    name: Criar release
+    runs-on: ubuntu-latest
+    concurrency: release
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Calcular a próxima versão
+        id: versao
+        run: |
+          ultima=$(git describe --tags --abbrev=0 --match 'v[0-9]*' 2>/dev/null || true)
+          if [ -n "$ultima" ]; then intervalo="$ultima..HEAD"; else intervalo="HEAD"; ultima="v0.0.0"; fi
+
+          if [ -z "$(git log "$intervalo" --format=%H | head -n 1)" ]; then
+            echo "Nenhum commit desde $ultima — nada a publicar."
+            exit 0
+          fi
+          commits=$(git log "$intervalo" --format='%s%n%b')
+
+          versao=${ultima#v}
+          major=${versao%%.*}; resto=${versao#*.}; minor=${resto%%.*}; patch=${resto#*.}
+
+          if printf '%s\n' "$commits" | grep -Eq '^[a-z]+(\([^)]*\))?!:|^BREAKING CHANGE'; then
+            nivel=major
+          elif printf '%s\n' "$commits" | grep -Eq '^feat(\([^)]*\))?:'; then
+            nivel=minor
+          else
+            nivel=patch
+          fi
+          # Enquanto a versão for 0.x, mudança incompatível sobe o minor.
+          if [ "$nivel" = major ] && [ "$major" = 0 ]; then nivel=minor; fi
+
+          case $nivel in
+            major) major=$((major + 1)); minor=0; patch=0 ;;
+            minor) minor=$((minor + 1)); patch=0 ;;
+            patch) patch=$((patch + 1)) ;;
+          esac
+
+          echo "proxima=v$major.$minor.$patch" >> "$GITHUB_OUTPUT"
+          echo "De $ultima para v$major.$minor.$patch ($nivel)"
+
+      - name: Publicar a release
+        if: steps.versao.outputs.proxima != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSAO: ${{ steps.versao.outputs.proxima }}
+        run: gh release create "$VERSAO" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "$VERSAO" --generate-notes
