@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Guia de contribuição
+    url: https://github.com/4dsm2026/.github/blob/main/CONTRIBUTING.md
+    about: Como abrir issues, nomear branches e enviar Pull Requests.
+  - name: Documentação do projeto
+    url: https://4dsm2026.github.io/docs_fatecProjeto/
+    about: Arquitetura, processos, histórias de usuário e UX.

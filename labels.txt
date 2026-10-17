@@ -1,0 +1,26 @@
+# Labels padrão da organização — formato: nome|cor|descrição
+# Aplicadas em todos os repositórios por scripts/sync-labels.sh
+priority:critical|b60205|Sistema quebrado, dado exposto, vulnerabilidade ativa
+priority:high|d93f0b|Impacta funcionalidade importante ou segurança
+priority:medium|fbca04|Corrigir no próximo ciclo, não bloqueia ninguém
+priority:low|0e8a16|Cosmético, débito técnico, seria bom ter
+[Bug]|d73a4a|Comportamento incorreto no sistema
+[Security]|ee0701|Vulnerabilidade, segredo exposto, falha de autenticação/autorização
+[Feature]|a2eeef|Nova funcionalidade
+[Fix]|f9d0c4|Correção pontual que não é bug de comportamento
+[Refactor]|c5def5|Melhoria interna sem mudar comportamento externo
+[Test]|bfd4f2|Cobertura, correção ou configuração de testes
+[Style]|fef2c0|CSS, espaçamento, visual — sem impacto funcional
+[Cleanup]|ededed|Código morto, variável não usada, código obsoleto
+[Docs]|0075ca|Documentação
+[A11y]|5319e7|Acessibilidade
+team:qa|006b75|Qualidade / Revisão
+team:novas-funcs-1|006b75|Novas Funcionalidades I
+team:novas-funcs-2|006b75|Novas Funcionalidades II
+team:refatoracao|006b75|Refatoração
+team:ux-ui|006b75|UX / UI
+team:docs-devops|006b75|Documentação / DevOps
+team:undefined|bfdadc|Ainda não triado — usar só temporariamente
+needs-discussion|d876e3|Precisa de discussão antes de começar
+duplicate|cfd3d7|Issue duplicada
+invalid|e4e669|Issue inválida

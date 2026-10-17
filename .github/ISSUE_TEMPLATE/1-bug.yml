@@ -1,0 +1,82 @@
+name: Bug
+description: Comportamento incorreto no sistema.
+title: "[Bug] "
+labels: ["[Bug]"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Depois de criar, aplique as labels de **prioridade** e de **equipes** escolhidas abaixo
+        (veja o [guia](https://github.com/4dsm2026/.github/blob/main/CONTRIBUTING.md#4-issues)).
+  - type: dropdown
+    id: prioridade
+    attributes:
+      label: Prioridade
+      options:
+        - "priority:critical"
+        - "priority:high"
+        - "priority:medium"
+        - "priority:low"
+    validations:
+      required: true
+  - type: dropdown
+    id: equipe-criadora
+    attributes:
+      label: Equipe criadora
+      options:
+        - "team:qa"
+        - "team:novas-funcs-1"
+        - "team:novas-funcs-2"
+        - "team:refatoracao"
+        - "team:ux-ui"
+        - "team:docs-devops"
+        - "team:undefined"
+    validations:
+      required: true
+  - type: dropdown
+    id: equipe-responsavel
+    attributes:
+      label: Equipe responsável
+      options:
+        - "team:qa"
+        - "team:novas-funcs-1"
+        - "team:novas-funcs-2"
+        - "team:refatoracao"
+        - "team:ux-ui"
+        - "team:docs-devops"
+        - "team:undefined"
+    validations:
+      required: true
+  - type: textarea
+    id: descricao
+    attributes:
+      label: O que acontece
+      description: Descreva o problema.
+    validations:
+      required: true
+  - type: textarea
+    id: passos
+    attributes:
+      label: Passos para reproduzir
+      placeholder: |
+        1. Entrar como aluno (RA 123456789)
+        2. Abrir "Meus chamados"
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Resultado esperado
+    validations:
+      required: true
+  - type: textarea
+    id: evidencias
+    attributes:
+      label: Evidências
+      description: Prints, vídeos ou logs (arraste para cá).
+  - type: input
+    id: arquivos
+    attributes:
+      label: Arquivos ou telas afetados
+      placeholder: "app/(dashboard)/aluno/chamados/[id]/page.tsx"

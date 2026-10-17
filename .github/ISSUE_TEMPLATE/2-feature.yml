@@ -1,0 +1,81 @@
+name: Nova funcionalidade
+description: Uma história de usuário com critérios de aceite.
+title: "[Feature] "
+labels: ["[Feature]"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Depois de criar, aplique as labels de **prioridade** e de **equipes** escolhidas abaixo
+        e coloque a issue na **milestone da sprint**.
+        Se a funcionalidade envolve backend e frontend, abra uma issue em cada repositório, uma citando a outra.
+  - type: dropdown
+    id: prioridade
+    attributes:
+      label: Prioridade
+      options:
+        - "priority:critical"
+        - "priority:high"
+        - "priority:medium"
+        - "priority:low"
+    validations:
+      required: true
+  - type: dropdown
+    id: equipe-criadora
+    attributes:
+      label: Equipe criadora
+      options:
+        - "team:qa"
+        - "team:novas-funcs-1"
+        - "team:novas-funcs-2"
+        - "team:refatoracao"
+        - "team:ux-ui"
+        - "team:docs-devops"
+        - "team:undefined"
+    validations:
+      required: true
+  - type: dropdown
+    id: equipe-responsavel
+    attributes:
+      label: Equipe responsável
+      options:
+        - "team:qa"
+        - "team:novas-funcs-1"
+        - "team:novas-funcs-2"
+        - "team:refatoracao"
+        - "team:ux-ui"
+        - "team:docs-devops"
+        - "team:undefined"
+    validations:
+      required: true
+  - type: textarea
+    id: historia
+    attributes:
+      label: História de usuário
+      value: |
+        **Como** <perfil: aluno, secretaria, técnico, administrador>,
+        **quero** <ação>,
+        **para** <benefício>.
+    validations:
+      required: true
+  - type: textarea
+    id: criterios
+    attributes:
+      label: Critérios de aceite
+      description: Condições verificáveis. Serão usadas pelo QA e pelos testes E2E.
+      placeholder: |
+        - [ ] O aluno consegue ...
+        - [ ] Campos obrigatórios: ...
+        - [ ] Somente perfis X e Y podem ...
+    validations:
+      required: true
+  - type: textarea
+    id: contexto
+    attributes:
+      label: Contexto
+      description: Telas, endpoints, regras de negócio, protótipos, links para a documentação.
+  - type: input
+    id: relacionadas
+    attributes:
+      label: Issues relacionadas
+      placeholder: "4dsm2026/backend_fatecProjeto#79"

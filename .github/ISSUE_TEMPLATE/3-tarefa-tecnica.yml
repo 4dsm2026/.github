@@ -1,0 +1,81 @@
+name: Tarefa técnica
+description: Fix, Refactor, Test, Style, Cleanup, Docs, A11y ou Security.
+title: "[Tipo] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Troque `[Tipo]` no título pelo tipo escolhido abaixo (ex.: `[Refactor] Remover void em auth.ts`).
+        Depois de criar, aplique as **4 labels**: prioridade, tipo, equipe criadora e equipe responsável.
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Tipo
+      options:
+        - "[Fix]"
+        - "[Refactor]"
+        - "[Test]"
+        - "[Style]"
+        - "[Cleanup]"
+        - "[Docs]"
+        - "[A11y]"
+        - "[Security]"
+    validations:
+      required: true
+  - type: dropdown
+    id: prioridade
+    attributes:
+      label: Prioridade
+      options:
+        - "priority:critical"
+        - "priority:high"
+        - "priority:medium"
+        - "priority:low"
+    validations:
+      required: true
+  - type: dropdown
+    id: equipe-criadora
+    attributes:
+      label: Equipe criadora
+      options:
+        - "team:qa"
+        - "team:novas-funcs-1"
+        - "team:novas-funcs-2"
+        - "team:refatoracao"
+        - "team:ux-ui"
+        - "team:docs-devops"
+        - "team:undefined"
+    validations:
+      required: true
+  - type: dropdown
+    id: equipe-responsavel
+    attributes:
+      label: Equipe responsável
+      options:
+        - "team:qa"
+        - "team:novas-funcs-1"
+        - "team:novas-funcs-2"
+        - "team:refatoracao"
+        - "team:ux-ui"
+        - "team:docs-devops"
+        - "team:undefined"
+    validations:
+      required: true
+  - type: textarea
+    id: contexto
+    attributes:
+      label: Contexto
+      description: O que está errado ou pode melhorar, e por quê.
+    validations:
+      required: true
+  - type: textarea
+    id: arquivos
+    attributes:
+      label: Arquivos afetados
+  - type: textarea
+    id: criterios
+    attributes:
+      label: Critério de aceite
+      placeholder: "- [ ] ..."
+    validations:
+      required: true
