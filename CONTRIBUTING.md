@@ -32,7 +32,7 @@ Issue  →  Branch  →  Pull Request  →  Revisão  →  develop  →  (fim da
 ```
 
 1. **Toda mudança começa com uma issue.** Se não existe, crie uma usando os modelos (seção 4).
-2. Atribua-se como **responsável** (*Assignees*) antes de começar. No [quadro do projeto](https://github.com/orgs/4dsm2026/projects), coloque a issue na **Sprint** atual e mova o **Status** conforme avança.
+2. Atribua-se como **responsável** (*Assignees*) antes de começar. No [quadro do projeto](https://github.com/orgs/4dsm2026/projects/3), coloque a issue na **Sprint** atual e mova o **Status** conforme avança.
 3. Crie a branch a partir de `develop` (seção 3).
 4. Abra o Pull Request para `develop` preenchendo o modelo — principalmente o campo **Issue** (seção 5).
 5. Após a aprovação e o merge, a issue é fechada pelo PR (não feche manualmente).
@@ -148,7 +148,7 @@ Quando a equipe responsável mudar, **troque a label**.
 
 ## 6. Sprints e versões
 
-- As sprints ficam no campo **Sprint** do [quadro do projeto](https://github.com/orgs/4dsm2026/projects), que reúne as issues e PRs dos quatro repositórios. Toda issue trabalhada na sprint deve estar nela.
+- As sprints ficam no campo **Sprint** do [quadro do projeto](https://github.com/orgs/4dsm2026/projects/3), que reúne as issues e PRs dos quatro repositórios. Toda issue trabalhada na sprint deve estar nela.
 - No fim da sprint, um PR `develop → main` é aberto. Quando ele é mesclado, o workflow **Release** cria sozinho a **tag** e a **release** com a próxima versão:
 
   | Commits desde a última versão | Nova versão |

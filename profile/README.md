@@ -11,6 +11,8 @@ Sistema de secretaria acadêmica desenvolvido pela turma **4º DSM 2026**: abert
 | [docs_fatecProjeto](https://github.com/4dsm2026/docs_fatecProjeto) | Documentação — [abrir o site](https://4dsm2026.github.io/docs_fatecProjeto/) |
 | [test_fatecProjeto](https://github.com/4dsm2026/test_fatecProjeto) | Testes de ponta a ponta (Selenium) |
 
+📋 **Quadro do projeto:** [WorkFlow 2026](https://github.com/orgs/4dsm2026/projects/3) — issues e PRs de todos os repositórios, por sprint, equipe e prioridade.
+
 ## Como participar
 
 1. Leia o [guia de contribuição](https://github.com/4dsm2026/.github/blob/main/CONTRIBUTING.md).

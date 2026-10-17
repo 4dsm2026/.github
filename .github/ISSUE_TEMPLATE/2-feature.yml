@@ -2,6 +2,7 @@ name: Nova funcionalidade
 description: Uma história de usuário com critérios de aceite.
 title: "[Feature] "
 labels: ["[Feature]"]
+projects: ["4dsm2026/3"]
 body:
   - type: markdown
     attributes:

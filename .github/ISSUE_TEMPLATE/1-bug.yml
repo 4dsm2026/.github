@@ -2,6 +2,7 @@ name: Bug
 description: Comportamento incorreto no sistema.
 title: "[Bug] "
 labels: ["[Bug]"]
+projects: ["4dsm2026/3"]
 body:
   - type: markdown
     attributes:

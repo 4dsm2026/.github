@@ -1,6 +1,7 @@
 name: Tarefa técnica
 description: Fix, Refactor, Test, Style, Cleanup, Docs, A11y ou Security.
 title: "[Tipo] "
+projects: ["4dsm2026/3"]
 body:
   - type: markdown
     attributes:
